@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Đồ Uống</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #f5f5dc;
+            color: #4b2e2e;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s;
+        }
+        .container {
+            width: 90%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header, .contact {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 48px;
+            margin: 0;
+        }
+        .header p {
+            font-size: 18px;
+            margin: 0;
+        }
+        .contact p {
+            font-size: 18px;
+            margin: 0;
+        }
+        .menu-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .menu-column {
+            width: 48%;
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+        .menu-column:hover {
+            transform: scale(1.02);
+        }
+        .menu-column h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #4b2e2e;
+            padding-bottom: 5px;
+            cursor: pointer;
+        }
+        .menu-column ul {
+            list-style: none;
+            padding: 0;
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        .menu-column ul li {
+            font-size: 18px;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .menu-column ul li:hover {
+            background-color: #e0d5a8;
+        }
+        .note {
+            font-size: 14px;
+            margin-top: 10px;
+            text-align: center;
+        }
+        img {
+            max-width: 50px;
+            margin-right: 10px;
+            border-radius: 5px;
+        }
+
+        /* Popup styling */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .popup-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            width: 80%;
+            max-width: 400px;
+        }
+        .popup-content h2 {
+            color: #4b2e2e;
+            margin-bottom: 10px;
+        }
+        .close-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4b2e2e;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        /* Cart styling */
+        .cart {
+            margin-top: 30px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #4b2e2e;
+            border-radius: 8px;
+        }
+        .cart h3 {
+            margin: 0;
+            text-align: center;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        .checkout-btn {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #4b2e2e;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            display: block;
+            width: 100%;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Điềm.mm.</h1>
+            <p>Hide to be seen</p>
+        </div>
+        <div class="contact">
+            <p>Địa chỉ: 25 Nguyễn Khắc Diện, Phú Lộc Đông 3, Diên Khánh</p>
+            <p>Điện thoại: 03646 335 821</p>
+            <p>Instagram: mm.meid</p>
+        </div>
+        <div class="menu-section">
+            <div class="menu-column">
+                <h2 onclick="toggleMenu('cafe')">CAFÉ</h2>
+                <ul id="cafe">
+                    <li onclick="addToCart('Café đen', 'Giá: 22k')"><img src="https://example.com/cafe-den.jpg" alt="Café đen">Café đen <span>22k</span></li>
+                    <li onclick="addToCart('Café sữa', 'Giá: 22k')"><img src="https://example.com/cafe-sua.jpg" alt="Café sữa">Café sữa <span>22k</span></li>
+                    <li onclick="addToCart('Bạc xỉu Điềm', 'Giá: 27k')"><img src="https://example.com/bac-xiu-diem.jpg" alt="Bạc xỉu Điềm">Bạc xỉu Điềm <span>27k</span></li>
+                    <li onclick="addToCart('Bạc xỉu Muối', 'Giá: 35k')"><img src="https://example.com/bac-xiu-muoi.jpg" alt="Bạc xỉu Muối">Bạc xỉu Muối <span>35k</span></li>
+                    <li onclick="addToCart('Café Kem Trứng', 'Giá: 32k')"><img src="https://example.com/cafe-kem-trung.jpg" alt="Café Kem Trứng">Café Kem Trứng <span>32k</span></li>
+                    <li onclick="addToCart('Café Kem Muối', 'Giá: 32k')"><img src="https://example.com/cafe-kem-muoi.jpg" alt="Café Kem Muối">Café Kem Muối <span>32k</span></li>
+                    <li onclick="addToCart('Café hạt dẻ', 'Giá: 32k')"><img src="https://example.com/cafe-hat-de.jpg" alt="Café hạt dẻ">Café hạt dẻ <span>32k</span></li>
+                    <li onclick="addToCart('Café cốt dừa', 'Giá: 32k')"><img src="https://example.com/cafe-cot-dua.jpg" alt="Café cốt dừa">Café cốt dừa <span>32k</span></li>
+                    <li onclick="addToCart('Cocaine', 'Giá: 39k')"><img src="https://example.com/cocaine.jpg" alt="Cocaine">Cocaine <span>39k</span></li>
+                </ul>
+                <p class="note">* Cảnh báo có thể gây nghiện</p>
+            </div>
+
+            <div class="menu-column">
+                <h2 onclick="toggleMenu('hot')">NÓNG chảy mỡ</h2>
+                <ul id="hot">
+                    <li onclick="addToCart('Hot Chocolate', 'Giá: 29k')"><img src="https://example.com/hot-chocolate.jpg" alt="Hot Chocolate">Hot Chocolate <span>29k</span></li>
+                    <li onclick="addToCart('Hot Milk', 'Giá: 29k')"><img src="https://example.com/hot-milk.jpg" alt="Hot Milk">Hot Milk <span>29k</span></li>
+                    <li onclick="addToCart('Trà gừng mật ong', 'Giá: 29k')"><img src="https://example.com/tra-gung-mat-ong.jpg" alt="Trà gừng mật ong">Trà gừng mật ong <span>29k</span></li>
+                    <li onclick="addToCart('Lạc thần cam quế', 'Giá: 32k')"><img src="https://example.com/lac-than-cam-que.jpg" alt="Lạc thần cam quế">Lạc thần cam quế <span>32k</span></li>
+                    <li onclick="addToCart('Trà nóng', 'Giá: 20k')"><img src="https://example.com/tra-nong.jpg" alt="Trà nóng">Trà nóng <span>20k</span></li>
+                </ul>
+                <p class="note">* * Độc quyền tại Điềm</p>
+            </div>
+
+            <div class="menu-column">
+                <h2 onclick="toggleMenu('cold')">LẠNH lạnh như crush</h2>
+                <ul id="cold">
+                    <li onclick="addToCart('Sinh tố bơ', 'Giá: 40k')"><img src="https://example.com/sinh-to-bo.jpg" alt="Sinh tố bơ">Sinh tố bơ <span>40k</span></li>
+                    <li onclick="addToCart('Sinh tố dứa', 'Giá: 35k')"><img src="https://example.com/sinh-to-dua.jpg" alt="Sinh tố dứa">Sinh tố dứa <span>35k</span></li>
+                    <li onclick="addToCart('Sinh tố xoài', 'Giá: 38k')"><img src="https://example.com/sinh-to-xoai.jpg" alt="Sinh tố xoài">Sinh tố xoài <span>38k</span></li>
+                    <li onclick="addToCart('Trà đào', 'Giá: 35k')"><img src="https://example.com/tra-dao.jpg" alt="Trà đào">Trà đào <span>35k</span></li>
+                    <li onclick="addToCart('Trà vải', 'Giá: 35k')"><img src="https://example.com/tra-vai.jpg" alt="Trà vải">Trà vải <span>35k</span></li>
+                </ul>
+                <p class="note">* Một ngụm mát lạnh để giải nhiệt</p>
+            </div>
+
+            <div class="menu-column">
+                <h2 onclick="toggleMenu('milktea')">TRÀ SỮA</h2>
+                <ul id="milktea">
+                    <li onclick="addToCart('Trà sữa truyền thống', 'Giá: 35k')"><img src="https://example.com/tra-sua-truyen-thong.jpg" alt="Trà sữa truyền thống">Trà sữa truyền thống <span>35k</span></li>
+                    <li onclick="addToCart('Trà sữa matcha', 'Giá: 40k')"><img src="https://example.com/tra-sua-matcha.jpg" alt="Trà sữa matcha">Trà sữa matcha <span>40k</span></li>
+                    <li onclick="addToCart('Trà sữa socola', 'Giá: 40k')"><img src="https://example.com/tra-sua-socola.jpg" alt="Trà sữa socola">Trà sữa socola <span>40k</span></li>
+                    <li onclick="addToCart('Trà sữa bạc hà', 'Giá: 42k')"><img src="https://example.com/tra-sua-bac-ha.jpg" alt="Trà sữa bạc hà">Trà sữa bạc hà <span>42k</span></li>
+                </ul>
+                <p class="note">* Ngọt ngào béo ngậy</p>
+            </div>
+
+            <div class="menu-column">
+                <h2 onclick="toggleMenu('fruittea')">TRÀ trái cây</h2>
+                <ul id="fruittea">
+                    <li onclick="addToCart('Trà dâu', 'Giá: 35k')"><img src="https://example.com/tra-dau.jpg" alt="Trà dâu">Trà dâu <span>35k</span></li>
+                    <li onclick="addToCart('Trà kiwi', 'Giá: 38k')"><img src="https://example.com/tra-kiwi.jpg" alt="Trà kiwi">Trà kiwi <span>38k</span></li>
+                    <li onclick="addToCart('Trà chanh', 'Giá: 30k')"><img src="https://example.com/tra-chanh.jpg" alt="Trà chanh">Trà chanh <span>30k</span></li>
+                    <li onclick="addToCart('Trà hoa quả', 'Giá: 40k')"><img src="https://example.com/tra-hoa-qua.jpg" alt="Trà hoa quả">Trà hoa quả <span>40k</span></li>
+                </ul>
+                <p class="note">* Tươi mát và đầy hương vị</p>
+            </div>
+
+            <div class="menu-column">
+                <h2 onclick="toggleMenu('yogurt')">YOGURT</h2>
+                <ul id="yogurt">
+                    <li onclick="addToCart('Yogurt tự nhiên', 'Giá: 30k')"><img src="https://example.com/yogurt-tu-nhien.jpg" alt="Yogurt tự nhiên">Yogurt tự nhiên <span>30k</span></li>
+                    <li onclick="addToCart('Yogurt trái cây', 'Giá: 35k')"><img src="https://example.com/yogurt-trai-cay.jpg" alt="Yogurt trái cây">Yogurt trái cây <span>35k</span></li>
+                    <li onclick="addToCart('Yogurt dẻo', 'Giá: 40k')"><img src="https://example.com/yogurt-deo.jpg" alt="Yogurt dẻo">Yogurt dẻo <span>40k</span></li>
+                </ul>
+                <p class="note">* Mát lạnh cho một ngày nắng nóng</p>
+            </div>
+        </div>
+
+        <div class="cart">
+            <h3>Giỏ hàng</h3>
+            <div id="cartItems"></div>
+            <button class="checkout-btn" onclick="checkout()">Thanh toán</button>
+        </div>
+    </div>
+
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <h2>Thông báo</h2>
+            <p id="popupMessage"></p>
+            <button class="close-btn" onclick="closePopup()">Đóng</button>
+        </div>
+    </div>
+
+    <script>
+        let cart = [];
+
+        function toggleMenu(menuId) {
+            const menu = document.getElementById(menuId);
+            if (menu.style.display === 'block') {
+                menu.style.display = 'none';
+            } else {
+                menu.style.display = 'block';
+            }
+        }
+
+        function addToCart(item, price) {
+            cart.push({ item, price });
+            document.getElementById('cartItems').innerHTML += `<div class="cart-item">${item} - ${price}</div>`;
+            showPopup(`${item} đã được thêm vào giỏ hàng!`);
+        }
+
+        function showPopup(message) {
+            document.getElementById('popupMessage').innerText = message;
+            document.getElementById('popup').style.display = 'flex';
+        }
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                showPopup('Giỏ hàng trống!');
+                return;
+            }
+            let total = cart.reduce((sum, item) => sum + parseInt(item.price.split(': ')[1].replace('k', '')), 0);
+            showPopup(`Tổng tiền thanh toán: ${total}k`);
+        }
+    </script>
+</body>
+</html>
+
